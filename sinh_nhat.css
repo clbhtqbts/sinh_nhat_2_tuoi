@@ -496,3 +496,49 @@ h1, h2, h3, h4 {
 @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 .modal-title { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--navy); margin: 0 0 10px 0; }
 .modal-text { font-size: 0.95rem; color: var(--text-dark); line-height: 1.6; margin: 0 0 25px 0; font-weight: 500; }
+/* --- Cụm Nút Điều Khiển Nhạc Mini --- */
+.music-widget {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 10000;
+}
+
+.music-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--pink);
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 107, 158, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.music-btn:hover {
+    transform: scale(1.1);
+    background: #ff4d88;
+}
+
+.music-btn.next-btn {
+    background: var(--blue);
+    box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+    font-size: 1rem;
+}
+
+.music-btn.next-btn:hover {
+    background: #357abd;
+}
+
+@media screen and (max-width: 768px) {
+    .music-widget { bottom: 20px; right: 20px; gap: 6px; }
+    .music-btn { width: 40px; height: 40px; font-size: 1rem; }
+}

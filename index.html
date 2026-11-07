@@ -21,9 +21,7 @@
     <div class="bg-particles" id="particles"></div>
 
     <!-- Nhạc nền -->
-    <audio id="bgMusic" loop>
-        <source src="assets/audio/bai_2.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="bgMusic"></audio>
 
     <!-- ========================================== -->
     <!-- GIAO DIỆN MÀN HÌNH BÌ THƯ -->
@@ -163,7 +161,7 @@
                 <div class="timeline-item right">
                     <div class="timeline-content">
                         <div class="time">17h45</div>
-                        <div class="timeline-text">Trình chiếu Video hành trình 3 năm</div>
+                        <div class="timeline-text">Trình chiếu Video hành trình 2 năm</div>
                     </div>
                 </div>
                 <div class="timeline-item left">
@@ -196,33 +194,42 @@
                         <div class="timeline-text">Tri ân, tặng quà, chụp ảnh</div>
                     </div>
                 </div>
+                
+                <!-- TIẾT MỤC VĂN NGHỆ MỚI BỔ SUNG -->
                 <div class="timeline-item right">
                     <div class="timeline-content">
                         <div class="time">18h45</div>
-                        <div class="timeline-text">Chuyển tiếp sang phần Sinh nhật</div>
+                        <div class="timeline-text">Tiết mục văn nghệ đặc biệt</div>
                     </div>
                 </div>
+
                 <div class="timeline-item left">
                     <div class="timeline-content">
                         <div class="time">18h55</div>
-                        <div class="timeline-text">Thổi nến, cắt bánh sinh nhật</div>
+                        <div class="timeline-text">Chuyển tiếp sang phần Sinh nhật</div>
                     </div>
                 </div>
                 <div class="timeline-item right">
                     <div class="timeline-content">
                         <div class="time">19h05</div>
-                        <div class="timeline-text">Chia sẻ cảm xúc, giao lưu</div>
+                        <div class="timeline-text">Thổi nến, cắt bánh sinh nhật</div>
                     </div>
                 </div>
                 <div class="timeline-item left">
                     <div class="timeline-content">
                         <div class="time">19h15</div>
-                        <div class="timeline-text">Tổng kết, cảm ơn, bế mạc</div>
+                        <div class="timeline-text">Chia sẻ cảm xúc, giao lưu</div>
                     </div>
                 </div>
                 <div class="timeline-item right">
                     <div class="timeline-content">
                         <div class="time">19h25</div>
+                        <div class="timeline-text">Tổng kết, cảm ơn, bế mạc</div>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="time">19h35</div>
                         <div class="timeline-text">Chụp ảnh tập thể, kết thúc chương trình</div>
                     </div>
                 </div>
@@ -276,7 +283,10 @@
 
     </div>
 
-    <button id="mute-btn" class="mute-btn" style="display: none;">🔊</button>
+    <div id="music-control-widget" class="music-widget" style="display: none;">
+        <button id="mute-btn" class="music-btn" title="Bật/Tắt Nhạc">🔊</button>
+        <button id="next-btn" class="music-btn next-btn" title="Bài Tiếp Theo">⏭</button>
+    </div>
     <!-- ========================================== -->
     <!-- POPUP THÔNG BÁO GỬI THÀNH CÔNG -->
     <!-- ========================================== -->

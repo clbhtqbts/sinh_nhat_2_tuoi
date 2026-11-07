@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const envelopeScreen = document.getElementById('envelope-screen');
     const mainContent = document.getElementById('main-content');
     const bgMusic = document.getElementById('bgMusic');
-    const muteBtn = document.getElementById('mute-btn');
+    const musicWidget = document.getElementById('music-control-widget');
     const clickHint = document.querySelector('.click-hint');
 
     const triggerOpen = () => {
@@ -53,13 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             if (envelopeScreen) envelopeScreen.style.display = 'none';
             if (mainContent) mainContent.style.display = 'block';
-            if (muteBtn) muteBtn.style.display = 'flex';
+            if (musicWidget) musicWidget.style.display = 'flex';
+
             reveal(); 
             
-            if (bgMusic) {
-                bgMusic.volume = 0.5;
-                bgMusic.play().catch(e => console.log("Cần tương tác người dùng để phát nhạc."));
-            }
+            playTrack(1); // Phát bài đầu tiên
         }, 2000);
     };
 
@@ -112,18 +110,60 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.addEventListener("scroll", reveal);
 
-    // 5. Logic Nút Bật/Tắt Nhạc
+   // 5. Logic Danh Sách Nhạc (Playlist + Nút Chuyển Bài + Tự động phát bài tiếp)
+    const playlist = [
+        'assets/audio/bai_1.mp3',
+        'assets/audio/bai_2.mp3',
+        'assets/audio/bai_3.mp3'
+    ];
+    
+    let currentTrackIndex = 0;
+    const muteBtn = document.getElementById('mute-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    function playTrack(index) {
+        if (!bgMusic || playlist.length === 0) return;
+        currentTrackIndex = index % playlist.length;
+        bgMusic.src = playlist[currentTrackIndex];
+        bgMusic.volume = 0.5;
+        bgMusic.play().then(() => {
+            if (muteBtn) muteBtn.innerHTML = '🔊';
+        }).catch(e => console.log("Cần tương tác người dùng để phát nhạc"));
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+            playTrack(currentTrackIndex);
+        });
+    }
+
+    if (bgMusic) {
+        bgMusic.addEventListener('ended', () => {
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+            playTrack(currentTrackIndex);
+        });
+    }
+
     if (muteBtn && bgMusic) {
         muteBtn.addEventListener('click', () => {
             if (bgMusic.paused) {
-                bgMusic.play();
-                muteBtn.innerHTML = '🔊';
+                if (!bgMusic.src || bgMusic.src === '' || bgMusic.src.endsWith('/')) {
+                    playTrack(0);
+                } else {
+                    bgMusic.play();
+                    muteBtn.innerHTML = '🔊';
+                }
             } else {
                 bgMusic.pause();
                 muteBtn.innerHTML = '🔇';
             }
         });
     }
+
+    // Trong hàm triggerOpen (Logic mở bì thư), sửa dóng hiện nút thành:
+    // if (musicWidget) musicWidget.style.display = 'flex';
+    // playTrack(0); // Phát bài đầu tiên
 
     // 6. Logic Custom Select Dropdown
     const customSelect = document.getElementById('custom-select');
